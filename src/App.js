@@ -14,8 +14,8 @@ class App extends React.Component {
         //     this.setState({
         //         t:newtask
         //     })
-        // },2000);
     }
+
     state = {
         t : [
             {text: 'aaa', Done: true, priority: 'low'},
@@ -33,7 +33,7 @@ class App extends React.Component {
          let newtask = [...this.state.t, newTask];
          this.setState({
              t:newtask
-         })
+         });
      };
 
     render = () => {
@@ -49,7 +49,7 @@ class App extends React.Component {
                     </div>
                     {/*<TodoListHeader/>*/}
                     <TodoListTasks tt={this.state.t}/>
-                    <TodoListFooter filter={this.state.filter}/>
+                    <TodoListFooter filter={this.state.task}/>
                 </div>
             </div>
         );
