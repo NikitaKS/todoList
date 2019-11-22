@@ -20,7 +20,7 @@ class App extends React.Component {
         filter: 'all',
     };
     onAddTask = (newText) => {
-        let newTask = {text: newText, Done: true, priority: 'low'};
+        let newTask = {text: newText, Done: false, priority: 'high'};
         let newtask = [...this.state.t, newTask];
         this.setState({
             t: newtask
@@ -38,7 +38,7 @@ class App extends React.Component {
             } else return {...item, Done: status};
         });
         this.setState({
-           t: newTasks
+            t: newTasks
         })
     };
     render = () => {
@@ -57,9 +57,9 @@ class App extends React.Component {
         return (
             <div className="App">
                 <div className="todoList">
-                    <TodoListHeader onAddTask={this.onAddTask}/>
+                    <TodoListHeader onAddTask={this.onAddTask} addNewText={this.addNewText}/>
                     <TodoListTasks changeStatus={this.changeStatus}
-                        tt={getFilteredTasks(this.state.t, this.state.filter)}/>
+                                   tt={getFilteredTasks(this.state.t, this.state.filter)}/>
                     <TodoListFooter changeFilterValue={this.changeFilterValue} filter={this.state.filter}/>
                 </div>
             </div>
