@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0b772ee0-b965-4845-a179-57f595972e1f" name="Default Changelist" comment="">
+    <list default="true" id="8734a3cc-5de1-430d-9bac-8813bae2e0b6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/debug.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TodoListFooter.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/TodoListFooter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TodoListHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/TodoListHeader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TodoListTask.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/TodoListTask.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TodoListTasks.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/TodoListTasks.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -10,10 +16,12 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FavoritesManager">
-    <favorites_list name="01-todolist" />
-  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="21cefb37717b45f552d9102e8b2a3051b54ea5c3" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1St8P8ZeNepFuYaGhCaetnAmdHU" />
@@ -76,7 +84,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="0b772ee0-b965-4845-a179-57f595972e1f" name="Default Changelist" comment="" />
+      <changelist id="8734a3cc-5de1-430d-9bac-8813bae2e0b6" name="Default Changelist" comment="" />
       <created>1572371504078</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -89,7 +97,12 @@
       <workItem from="1572986161673" duration="1061000" />
       <workItem from="1573054262156" duration="113000" />
       <workItem from="1573054591675" duration="1663000" />
-      <workItem from="1573571598227" duration="14754000" />
+      <workItem from="1574268968534" duration="1287000" />
+      <workItem from="1574272610922" duration="5475000" />
+      <workItem from="1574350915606" duration="1312000" />
+      <workItem from="1574361785944" duration="7000" />
+      <workItem from="1574366004981" duration="1754000" />
+      <workItem from="1574428801467" duration="1029000" />
     </task>
     <servers />
   </component>
