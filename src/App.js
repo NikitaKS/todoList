@@ -5,11 +5,6 @@ import TodoListTasks from "./TodoListTasks";
 import TodoListFooter from "./TodoListFooter";
 
 class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.RefInput = React.createRef();
-    }
-
     state = {
         t: [
             {text: 'First Lesson', Done: true, priority: 'low'},
@@ -41,6 +36,14 @@ class App extends React.Component {
             t: newTasks
         })
     };
+    deleteTask = (task) => {
+        let newTasks = this.state.t.filter(item => {
+            if (item !== task) return item;
+        });
+        this.setState({
+            t: newTasks
+        })
+    };
     render = () => {
         const getFilteredTasks = (tasks, filter) => {
             return tasks.filter(item => {
@@ -58,7 +61,7 @@ class App extends React.Component {
             <div className="App">
                 <div className="todoList">
                     <TodoListHeader onAddTask={this.onAddTask} addNewText={this.addNewText}/>
-                    <TodoListTasks changeStatus={this.changeStatus}
+                    <TodoListTasks deleteTask={this.deleteTask} changeStatus={this.changeStatus}
                                    tt={getFilteredTasks(this.state.t, this.state.filter)}/>
                     <TodoListFooter changeFilterValue={this.changeFilterValue} filter={this.state.filter}/>
                 </div>

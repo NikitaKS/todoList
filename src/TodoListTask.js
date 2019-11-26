@@ -2,28 +2,35 @@ import React from 'react';
 import './App.css';
 
 class TodoListTask extends React.Component {
-    getStatusInput = (e) =>{
+    getStatusInput = (e) => {
         this.props.changeStatus(this.props.tasks, e.currentTarget.checked);
     };
+    deleteTask = () => {
+        this.props.deleteTask(this.props.tasks)
+    };
+
     render = () => {
         let prior;
         switch (this.props.tasks.priority) {
             case 'low':
-                prior ='low';
+                prior = 'low';
                 break;
             case 'medium':
-                prior ='medium';
+                prior = 'medium';
                 break;
             case 'high':
-                prior ='high';
+                prior = 'high';
                 break;
         }
+        let status;
+        if (this.props.tasks.Done) {
+            status =`${'todoList-task'} ${'done'}`;
+        } else status = 'todoList-task';
         return (
-            <div className="todoList-tasks">
-                <div className="todoList-task">
-                    <input onChange={this.getStatusInput} type="checkbox" checked={this.props.tasks.Done}/>
-                    <span className={prior}>{this.props.tasks.text} </span>
-                </div>
+            <div className={status}>
+                <button onClick={this.deleteTask}>X</button>
+                <input onChange={this.getStatusInput} type="checkbox" checked={this.props.tasks.Done}/>
+                <span className={prior}>{this.props.tasks.text} </span>
             </div>
         );
     }

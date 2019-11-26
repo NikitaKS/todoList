@@ -1,7 +1,9 @@
 .App {
 
 }
-
+input {
+  outline: none;
+}
 .todoList {
   width: 500px;
   margin: 0 auto;
@@ -25,4 +27,11 @@
 }
 .filter-active {
   background-color: dodgerblue;
+}
+.error {
+  border-color: red;
+
+}
+.todoList-task.done {
+  text-decoration: line-through;
 }
