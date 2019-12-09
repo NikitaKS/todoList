@@ -4,20 +4,21 @@ import './App.css';
 class TodoListHeader extends React.Component {
     state = {
         inputValue: '',
-        error: false
+        error: false,
+        priority: 'low'
     };
     onAddClick = () => {
         if (this.state.inputValue.replace(/^\s+|\s+$/g, '') === '') {
             this.setState({
-                error: true
+                error: true,
             });
         } else {
-            this.props.onAddTask(this.state.inputValue);
+            this.props.onAddTask(this.state.inputValue, this.state.priority);
             this.setState({
                 error: false
             })
         }
-        this.setState({inputValue: ""})
+        this.setState({inputValue: "",priority: 'low'})
     };
     onInputChange = (e) => {
         let inputValue = e.currentTarget.value.trimLeft();
@@ -41,8 +42,14 @@ class TodoListHeader extends React.Component {
                            value={this.state.inputValue}
                     />
                     <button onClick={this.onAddClick}>Add</button>
+
                 </div>
+                {this.state.error &&<span>Enter task name</span>}
+                <button onClick={()=>this.setState({priority:'low'})}>low</button>
+                <button onClick={()=>this.setState({priority:'high'})}>high</button>
+                <button onClick={()=>this.setState({priority:'medium'})}>medium</button>
             </div>
+
         );
     }
 }

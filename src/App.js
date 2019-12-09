@@ -5,44 +5,95 @@ import TodoListTasks from "./TodoListTasks";
 import TodoListFooter from "./TodoListFooter";
 
 class App extends React.Component {
+    componentDidMount() {
+        this.restoreState();
+    }
+
+    nextTaskId = 0;
     state = {
-        t: [
-            {text: 'First Lesson', Done: true, priority: 'low'},
-            {text: 'Second Lesson', Done: true, priority: 'medium'},
-            {text: 'Third Lesson', Done: true, priority: 'high'},
-            {text: '4th Lesson', Done: false, priority: 'low'},
-        ],
+        t: [],
         filter: 'all',
     };
-    onAddTask = (newText) => {
-        let newTask = {text: newText, Done: false, priority: 'high'};
+
+    saveState = () => {
+        let saveAsString = JSON.stringify(this.state);
+        localStorage.setItem('our-state', saveAsString)
+    };
+    restoreState = () => {
+        let state = {
+            t: [],
+            filter: 'all',
+        };
+        let stateAsString = localStorage.getItem('our-state');
+        if (stateAsString !== null) {
+            state = JSON.parse(stateAsString);
+        }
+        this.setState(state, () => {
+            state.t.forEach(item => {
+                if (item.id >= this.nextTaskId) {
+                    this.nextTaskId = item.id + 1;
+                }
+            })
+        });
+
+        // if (state.t.length){
+        //     let id = state.t.reduce(function (p, v) {
+        //         return ( p > v.id ? p : v.id );
+        //     });
+        //     this.nextTaskId = id+1;
+        // }
+    };
+    onAddTask = (newText, pr) => {
+        let newTask = {id: this.nextTaskId, text: newText, Done: false, priority: pr};
+        this.nextTaskId++;
         let newtask = [...this.state.t, newTask];
         this.setState({
-            t: newtask
+            t: newtask,
+        }, () => {
+            this.saveState()
         });
     };
     changeFilterValue = (newFilterValue) => {
         this.setState({
             filter: newFilterValue
+        }, () => {
+            this.saveState()
         })
     };
-    changeStatus = (task, status) => {
+    changeStatus = (taskId, status) => {
+        this.changeTask(taskId, {Done: status})
+    };
+    changeTaskTitle = (taskId, text) => {
+        this.changeTask(taskId, {text: text});
+
+    };
+    changeTask = (taskId, obj) => {
         let newTasks = this.state.t.map(item => {
-            if (item !== task) {
+            if (item.id !== taskId) {
                 return item;
-            } else return {...item, Done: status};
+            } else return {...item, ...obj};
         });
         this.setState({
             t: newTasks
+        }, () => {
+            this.saveState()
         })
     };
-    deleteTask = (task) => {
+    deleteTask = (taskId) => {
         let newTasks = this.state.t.filter(item => {
-            if (item !== task) return item;
+            if (item.id !== taskId) return item;
+        });
+        this.nextTaskId = 0;
+        newTasks.map((item, index) => {
+            item.id = index;
+            this.nextTaskId = index + 1;
         });
         this.setState({
             t: newTasks
-        })
+        }, () => {
+            this.saveState()
+        });
+
     };
     render = () => {
         const getFilteredTasks = (tasks, filter) => {
@@ -61,7 +112,8 @@ class App extends React.Component {
             <div className="App">
                 <div className="todoList">
                     <TodoListHeader onAddTask={this.onAddTask} addNewText={this.addNewText}/>
-                    <TodoListTasks deleteTask={this.deleteTask} changeStatus={this.changeStatus}
+                    <TodoListTasks changeTaskTitle={this.changeTaskTitle} deleteTask={this.deleteTask}
+                                   changeStatus={this.changeStatus}
                                    tt={getFilteredTasks(this.state.t, this.state.filter)}/>
                     <TodoListFooter changeFilterValue={this.changeFilterValue} filter={this.state.filter}/>
                 </div>
