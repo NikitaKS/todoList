@@ -1,37 +1,46 @@
 .App {
+    display: flex;
+    flex-direction: row;
+}
 
-}
 input {
-  outline: none;
+    outline: none;
 }
+
 .todoList {
-  width: 500px;
-  margin: 0 auto;
+    width: 300px;
+    margin: 0 auto;
 }
 
 .todoList > div {
-  padding: 10px;
+    padding: 10px;
 }
 
 .todoList-task {
 
 }
-.low{
-  color: green;
+
+.low {
+    color: green;
 }
-.medium{
-  color: dodgerblue;
+
+.medium {
+    color: dodgerblue;
 }
-.high{
-  color: red;
+
+.high {
+    color: red;
 }
+
 .filter-active {
-  background-color: dodgerblue;
+    background-color: dodgerblue;
 }
+
 .error {
-  border-color: red;
+    border-color: red;
 
 }
+
 .todoList-task.done {
-  text-decoration: line-through;
+    text-decoration: line-through;
 }
