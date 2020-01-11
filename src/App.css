@@ -19,6 +19,11 @@ input {
 .todoList-task {
 
 }
+.todolist-title-in{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
 
 .low {
     color: green;

@@ -36,6 +36,9 @@ class TodoListFooter extends React.Component {
             case 'active':
                 filter3 = 'filter-active';
                 break;
+            default:
+                filter1 = 'filter-active';
+                break;
         }
         return (
             <div className="todoList-footer">

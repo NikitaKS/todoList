@@ -4,8 +4,7 @@ import './App.css';
 class AddNewItemForm extends React.Component {
     state = {
         inputValue: '',
-        error: false,
-        priority: 'low'
+        error: false
     };
     onAddClick = () => {
         if (this.state.inputValue.replace(/^\s+|\s+$/g, '') === '') {
@@ -13,12 +12,12 @@ class AddNewItemForm extends React.Component {
                 error: true,
             });
         } else {
-            this.props.onAddItem(this.state.inputValue, this.state.priority);
+            this.props.onAddItem(this.state.inputValue);
             this.setState({
                 error: false
             })
         }
-        this.setState({inputValue: "",priority: 'low'})
+        this.setState({inputValue: ""})
     };
     onInputChange = (e) => {
         let inputValue = e.currentTarget.value.trimLeft();
@@ -44,9 +43,6 @@ class AddNewItemForm extends React.Component {
 
                 </div>
                 {this.state.error &&<span>Enter task name</span>}
-                <button onClick={()=>this.setState({priority:'low'})}>low</button>
-                <button onClick={()=>this.setState({priority:'high'})}>high</button>
-                <button onClick={()=>this.setState({priority:'medium'})}>medium</button>
             </div>
 
         );
