@@ -32,7 +32,7 @@ class AddNewItemForm extends React.Component {
     render = () => {
         let inputError = this.state.error ? 'error' : '';
         return (
-            <div className="todoList-header">
+            <div className="todoList-header-input">
                 <div className="todoList-newTaskForm">
                     <input onKeyPress={this.key} className={inputError} onChange={this.onInputChange}
                            type="text"

@@ -4,15 +4,24 @@ import './App.css';
 class TodoListTask extends React.Component {
     state = {
         editTask: false,
-        priority: 'low'
+        priority: 'low',
+        inputValue: this.props.task.title,
+        inputError: false
+    };
+
+    onTitleChange = (e) => {
+        this.setState({
+            inputValue: e.currentTarget.value
+        });
     };
 
     getStatusInput = (e) => {
-        this.props.changeStatus(this.props.tasks.id, e.currentTarget.checked);
+        let status = e.currentTarget.checked ? 2 : 0;
+        this.props.changeStatus(this.props.task.id, status);
     };
 
     deleteTask = () => {
-        this.props.deleteTask(this.props.tasks.id)
+        this.props.deleteTask(this.props.task.id)
     };
     activeChangeTask = () => {
         this.setState({
@@ -22,11 +31,8 @@ class TodoListTask extends React.Component {
     deactivateChangeTask = () => {
         this.setState({
             editTask: false
-        })
-    };
-
-    inTitleChange = (e) => {
-        this.props.changeTaskTitle(this.props.tasks.id, e.currentTarget.value);
+        });
+        this.props.changeTaskTitle(this.props.task.id, this.state.inputValue);
     };
 
     render = () => {
@@ -45,26 +51,41 @@ class TodoListTask extends React.Component {
                 prior = 'low';
                 break;
         }
-        let status = this.props.tasks.isDone ? 'todoList-task done' : 'todoList-task';
+        let isCompletedTask = this.props.task.status === 2;
+        let containerCssClass = isCompletedTask ? "todoList-task done" : "todoList-task";
+        let priorityTitle = "";
+        switch (this.props.task.priority) {
+            case 0:
+                priorityTitle = "Low";
+                break;
+            case 1:
+                priorityTitle = "Middle";
+                break;
+            case 2:
+                priorityTitle = "High";
+                break;
+            case 3:
+                priorityTitle = "Urgently";
+                break;
+            case 4:
+                priorityTitle = "Later";
+                break;
+        }
         return (
-            <div className={status}>
+            <div className={containerCssClass}>
                 <button onClick={this.deleteTask}>X</button>
-                <input onChange={this.getStatusInput} type="checkbox" checked={this.props.tasks.isDone}/>
-                {this.state.editTask ?
+                <input onChange={this.getStatusInput} type="checkbox" checked={isCompletedTask}/>
+                {this.state.editTask
+                    ?
                     <input onBlur={this.deactivateChangeTask}
                            autoFocus={true}
-                           onChange={this.inTitleChange}
-                           value={this.props.tasks.title}
-                           type="text"/> :
+                           onChange={this.onTitleChange}
+                           value={this.state.inputValue}
+                           type="text"/>
+                    :
                     <span
                         onClick={this.activeChangeTask}
-                        className={prior}>{this.props.tasks.id} - {this.props.tasks.title} </span>}
-                <select>
-                    <option>priority</option>
-                    <option>low</option>
-                    <option>medium</option>
-                    <option>high</option>
-                </select>
+                        className={prior}>{this.state.inputValue} - {priorityTitle}</span>}
             </div>
         );
     }
