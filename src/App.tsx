@@ -3,20 +3,31 @@ import './App.css';
 import ToDoList from "./ToDoList";
 import AddNewItemForm from "./AddNewItemForm";
 import {connect} from "react-redux";
-import {addTodolistAC, addTodoListTC, setTodolistsAC, setTodoListsTC} from "./Store";
-import {api} from "./dal/api";
+import {AppState} from "./Store";
+import {addTodoListTC, setTodoListsTC} from "./redux/reducer";
+import {ActionsTypes, ITodo} from "./types/actionsTypes";
+import {ThunkDispatch} from 'redux-thunk';
 
-class App extends React.Component {
+interface IMapStateProps {
+    toDoLists: ITodo[]
+}
+
+interface IMapDispatchProps {
+    addNewToDoList: (title: string) => void;
+    setTodoLists: () => void;
+}
+
+class App extends React.Component<IMapStateProps & IMapDispatchProps> {
 
     componentDidMount() {
         this.props.setTodoLists();
     }
 
-    addTodoList = (title) => {
-            this.props.addNewToDoList(title)
+    addTodoList = (title: string) => {
+        this.props.addNewToDoList(title)
     };
     render = () => {
-        let todolists = this.props.toDoLists.map(item => {
+        let todolists = this.props.toDoLists.map((item,index) => {
             return <ToDoList key={item.id} id={item.id} title={item.title} tasks={item.tasks}/>
         });
         return (
@@ -28,21 +39,20 @@ class App extends React.Component {
                     {todolists}
                 </div>
             </div>
-
         );
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: AppState): IMapStateProps => {
     return {
-        toDoLists: state.toDoLists
+        toDoLists: state.todolists.toDoLists
     }
 };
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, ActionsTypes>): IMapDispatchProps => {
     return {
-        addNewToDoList: (title) => {
-           let thunk = addTodoListTC(title);
-           dispatch(thunk)
+        addNewToDoList: (title: string) => {
+            let thunk = addTodoListTC(title);
+            dispatch(thunk)
         },
         setTodoLists() {
             let thunk = setTodoListsTC();

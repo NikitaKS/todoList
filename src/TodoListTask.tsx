@@ -1,7 +1,22 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import './App.css';
+import {ITask} from "./types/actionsTypes";
 
-class TodoListTask extends React.Component {
+interface IProps {
+    task: ITask;
+    changeStatus: (id: string, status: number) => void;
+    deleteTask: (id: string) => void;
+    changeTaskTitle: (id: string, title: string) => void;
+}
+
+interface IState {
+    editTask: boolean,
+    priority: string,
+    inputValue: string,
+    inputError: boolean
+}
+
+class TodoListTask extends React.Component<IProps, IState> {
     state = {
         editTask: false,
         priority: 'low',
@@ -9,13 +24,13 @@ class TodoListTask extends React.Component {
         inputError: false
     };
 
-    onTitleChange = (e) => {
+    onTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
         this.setState({
             inputValue: e.currentTarget.value
         });
     };
 
-    getStatusInput = (e) => {
+    getStatusInput = (e: ChangeEvent<HTMLInputElement>) => {
         let status = e.currentTarget.checked ? 2 : 0;
         this.props.changeStatus(this.props.task.id, status);
     };

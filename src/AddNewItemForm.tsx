@@ -1,10 +1,19 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import './App.css';
 
-class AddNewItemForm extends React.Component {
+interface IProps {
+    onAddItem: (title: string) => void;
+}
+
+interface IState {
+    inputValue: string;
+    error: boolean;
+}
+
+class AddNewItemForm extends React.Component<IProps, IState> {
     state = {
         inputValue: '',
-        error: false
+        error: false,
     };
     onAddClick = () => {
         if (this.state.inputValue.replace(/^\s+|\s+$/g, '') === '') {
@@ -19,14 +28,14 @@ class AddNewItemForm extends React.Component {
         }
         this.setState({inputValue: ""})
     };
-    onInputChange = (e) => {
+    onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         let inputValue = e.currentTarget.value.trimLeft();
         this.setState({inputValue: inputValue});
         this.setState({
             error: false
         })
     };
-    key = (e) => {
+    key = (e: React.KeyboardEvent) => {
         let key = (e.key === 'Enter') ? this.onAddClick() : '';
     };
     render = () => {
@@ -42,7 +51,7 @@ class AddNewItemForm extends React.Component {
                     <button onClick={this.onAddClick}>Add</button>
 
                 </div>
-                {this.state.error &&<span>Enter task name</span>}
+                {this.state.error && <span>Enter task name</span>}
             </div>
 
         );

@@ -1,12 +1,23 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import './App.css';
 
-class ToDoListTitle extends React.Component {
+interface IProps {
+    title: string;
+    changeListTitle: (newTitle: string) => void;
+    delete: () => void
+}
+
+interface IState {
+    editMode: boolean;
+    inputValue: string
+}
+
+class ToDoListTitle extends React.Component<IProps, IState> {
     state = {
         editMode: false,
         inputValue: this.props.title
     };
-    onTitleChange = (e) => {
+    onTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
         this.setState({inputValue: e.currentTarget.value})
     };
     activateEditMode = () => {
